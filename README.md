@@ -17,7 +17,7 @@ The hamburger icon is implemented using the **CSS checkbox toggle technique**, w
 Includes smooth animations and a mobile-friendly layout.
 
 **🔗 Live Demo:**  
-https://mohddanish8400.github.io/webjourney-30days/day-01-project-Sidebar/
+https://mohddanish8400.github.io/webjourney-30days/day-01-project-sidebar/
 
 **🛠️ Technologies Used:**  
 - HTML5  
