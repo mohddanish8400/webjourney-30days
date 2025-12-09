@@ -17,7 +17,7 @@
             }
             }
             if(password.value.length<6){
-                errors.push("password length must be >= than 6");
+                errors.push("password length must be >= 6");
             }
             if(errors.length>0){
                 alert(errors.join("\n"));
