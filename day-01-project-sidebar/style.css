@@ -25,7 +25,11 @@
     .sidebar_menu{
         position: fixed;
         left: -350px;
+<<<<<<< Updated upstream
         min-height: 100vh;
+=======
+        min-height: 90vh;
+>>>>>>> Stashed changes
         width: 300px;
         background-color: darkgray;
         box-shadow: 0 0 2px gray;

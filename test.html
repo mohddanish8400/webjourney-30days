@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .login-container {
+            background: white;
+            padding: 40px 35px;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h3 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input-group i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            z-index: 1;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 16px 16px 16px 48px;
+            border-radius: 12px;
+            width: 100%;
+            font-size: 16px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #ff9500;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.1);
+            transform: translateY(-1px);
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            text-align: left;
+            font-size: 14px;
+            color: #666;
+        }
+        .remember-me input[type="checkbox"] {
+            margin-right: 8px;
+            width: auto;
+            accent-color: #ff9500;
+        }
+        button {
+            background: linear-gradient(45deg, #ff9500, #ff6b00);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        button.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .forgot-password {
+            display: block;
+            margin: 16px 0 32px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .forgot-password:hover {
+            color: #ff9500;
+        }
+        p {
+            font-size: 15px;
+            color: #666;
+            font-weight: 500;
+        }
+        .signup-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+        .signup-link:hover {
+            color: #0056b3;
+        }
+        .error-shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .toast.error {
+            background: #dc3545;
+        }
+        /* Mobile Responsiveness */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 25px;
+                margin: 10px;
+            }
+            h3 {
+                font-size: 1.8rem;
+            }
+            input[type="text"], input[type="password"] {
+                padding: 14px 14px 14px 44px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h3><i class="fas fa-lock" style="color: #ff9500; margin-right: 8px;"></i>Login</h3>
+        <form id="loginForm">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" placeholder="Username" name="username" aria-label="Username" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" name="password" aria-label="Password" required>
+            </div>
+            <div class="remember-me">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            <button type="submit" id="loginBtn">LOG IN</button>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+            <p>Not a member? <a href="#" class="signup-link">Sign Up Now</a></p>
+        </form>
+    </div>
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const form = document.getElementById("loginForm");
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        const remember = document.getElementById("remember");
+        const loginBtn = document.getElementById("loginBtn");
+        const toast = document.getElementById("toast");
+
+        // Real-time validation
+        [username, password].forEach(input => {
+            input.addEventListener('blur', validateInput);
+        });
+
+        function validateInput(input) {
+            if (input.value.trim() === '') return;
+            if (input === username) {
+                const firstFour = input.value.substring(0, 4);
+                if (!/^[A-Za-z]{4}$/.test(firstFour)) {
+                    input.classList.add('error-shake');
+                    setTimeout(() => input.classList.remove('error-shake'), 500);
+                }
+            } else if (input === password && input.value.length < 6) {
+                input.classList.add('error-shake');
+                setTimeout(() => input.classList.remove('error-shake'), 500);
+            }
+        }
+
+        function showToast(message, isError = false) {
+            toast.textContent = message;
+            toast.className = `toast ${isError ? 'error' : ''}`;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 3000);
+        }
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            loginBtn.textContent = '';
+            loginBtn.classList.add('loading'); // Spinner
+
+            let errors = [];
+            const userValue = username.value.trim();
+            const passValue = password.value.trim();
+
+            if (userValue === "") {
+                errors.push("Username can't be empty");
+            } else {
+                const firstFour = userValue.substring(0, 4);
+                if (!/^[A-Za-z]{4}$/.test(firstFour)) {
+                    errors.push("Username's first 4 characters must be letters (A-Z or a-z)");
+                }
+            }
+            if (passValue.length < 6) {
+                errors.push("Password must be at least 6 characters");
+            }
+
+            setTimeout(() => { // Simulate async (e.g., API call)
+                loginBtn.classList.remove('loading');
+                loginBtn.textContent = 'LOG IN';
+
+                if (errors.length > 0) {
+                    showToast(errors.join('\n'), true);
+                    username.classList.add('error-shake');
+                    setTimeout(() => username.classList.remove('error-shake'), 500);
+                } else {
+                    const msg = remember.checked ? "Login Successful! ✔ (Remember Me enabled)" : "Login Successful! ✔";
+                    showToast(msg);
+                    // Optional: Redirect or clear form
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
