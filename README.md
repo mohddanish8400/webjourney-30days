@@ -46,5 +46,28 @@ https://mohddanish8400.github.io/webjourney-30days/day-02-project-LoginPage/
 
 ---
 
+### 🟨 Day 03 — Profile Cards UI (3 Unique Designs)  
+**📌 Description:**  
+A responsive profile cards UI showcasing **three different card designs**:
+- Standard profile card  
+- Raised (3D / Neumorphic style) card  
+- Premium image-based card with gradient overlay  
+
+Focus was on **UI aesthetics, hover effects, shadows, gradients, and responsiveness** without using JavaScript.
+The Profile Card project demonstrates how the same content can be presented using **multiple visual styles** while maintaining consistency and responsiveness.
+
+**🔗 Live Demo:**  
+https://mohddanish8400.github.io/webjourney-30days/day-03-project-ProfileCard/
+
+**🛠️ Technologies Used:**  
+- HTML5 (Semantic Elements)  
+- CSS3 (Grid, Flexbox, Gradients, Shadows, Hover Effects)  
+
+**📁 Folder:**  
+`/day-03-project-ProfileCard`
+
+---
+
+
 
 
